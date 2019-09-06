@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button can be inserted Can be added 1`] = `
+"<!-- wp:button -->
+<div class=\\"wp-block-button\\"><a class=\\"wp-block-button__link\\"></a></div>
+<!-- /wp:button -->"
+`;
