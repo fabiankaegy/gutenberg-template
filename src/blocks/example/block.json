@@ -1,5 +1,17 @@
 {
-	"name": "Example Block",
+	"title": "Example Block",
+	"icon": "format-status",
 	"category": "common",
-	"keyowrds": ["example", "test", "123"]
+	"keywords": ["example", "test", "123"],
+	"attributes": {
+		"content": {
+			"type": "string",
+			"default": "Hello Wolrd!"
+		}
+	},
+	"example": {
+		"attributes": {
+			"content": "Start writing, no matter what. The water does not flow until the faucet is turned on."
+		}
+	}
 }

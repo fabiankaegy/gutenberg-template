@@ -1,7 +1,19 @@
+import { RichText } from "@wordpress/block-editor";
+
 export default props => {
 	const {
 		classname,
-		attributes: {}
+		attributes: { content },
+		setAttributes
 	} = props;
-	return <p className={classname}>Hello World!</p>;
+	return (
+		<RichText
+			tagName="p"
+			className={classname}
+			value={content}
+			onChange={newContent => {
+				setAttributes({ content: newContent });
+			}}
+		/>
+	);
 };

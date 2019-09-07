@@ -1,1 +1,1 @@
-import "./blocks/example";
+import "./blocks/example/";

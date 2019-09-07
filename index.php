@@ -10,91 +10,45 @@
  * Version: 1.0.0
  */
 
-namespace Arvernus\Apple_Maps_Block;
-//  Exit if accessed directly.
-defined('ABSPATH') || exit;
-
-$plugin_data = get_file_data(__FILE__, array('Version' => 'Version'), false);
+$plugin_data = get_file_data(__FILE__, ['Version' => 'Version'], false);
 $plugin_version = $plugin_data['Version'];
+define( "PLUGIN_VERSION", $plugin_version );
 
-define('BLOCK_CURRENT_VERSION', $plugin_version);
-
-add_action('plugins_loaded', __NAMESPACE__ . '\arvernus_load_textdomain');
-function arvernus_load_textdomain()
-{
-    load_plugin_textdomain(__NAMESPACE__ . '-block', false, basename(dirname(__FILE__)) . '/languages/');
-}
-
-/**
- * Gets this plugin's absolute directory path.
- *
- * @since  2.1.0
- * @ignore
- * @access private
- *
- * @return string
- */
-function _get_plugin_directory()
-{
-    return __DIR__;
-}
-
-/**
- * Gets this plugin's URL.
- *
- * @since  2.1.0
- * @ignore
- * @access private
- *
- * @return string
- */
-function _get_plugin_url()
-{
-    static $plugin_url;
-    if (empty($plugin_url)) {
-        $plugin_url = plugins_url(null, __FILE__);
-    }
-    return $plugin_url;
-}
-
-define('PLUGIN_ROOT', _get_plugin_url(__FILE__));
-
-
-add_action('init', __NAMESPACE__ . '\register_block_assets');
+add_action('init',  'register_block_assets');
 function register_block_assets()
 {
 
-    $block_path = '/build/index.js';
-    $script_deps_path = _get_plugin_directory() . '/build/editor.deps.json';
+    $block_path = 'build/index.js';
+    $script_deps_path = plugins_url('build/index.deps.json', __FILE__);
     $script_dependencies = file_exists($script_deps_path)
         ? json_decode(file_get_contents($script_deps_path))
-        : array();
+        : [];
     wp_register_script(
-        __NAMESPACE__ . '-block',
-        PLUGIN_ROOT . $block_path,
-        array_merge($script_dependencies, ['apple-mapkit-js']),
-        BLOCK_CURRENT_VERSION
+        'example-block',
+        plugins_url($block_path, __FILE__ ),
+        array_merge($script_dependencies, []),
+        PLUGIN_VERSION
     );
 
-    $style_path = '/style.css';
+    $style_path = 'style.css';
     wp_register_style(
-        __NAMESPACE__ . '-block-styles',
-        PLUGIN_ROOT . $style_path,
+        'example-block-styles',
+        plugins_url($style_path, __FILE__ ),
         [],
-        BLOCK_CURRENT_VERSION
+        PLUGIN_VERSION
     );
 
-    $editor_style_path = '/editor.css';
+    $editor_style_path = 'editor.css';
     wp_register_style(
-        __NAMESPACE__ . '-block-editor-styles',
-        PLUGIN_ROOT . $editor_style_path,
+        'example-block-editor-styles',
+        plugins_url($editor_style_path, __FILE__ ),
         [],
-        BLOCK_CURRENT_VERSION
+        PLUGIN_VERSION
     );
 
-    register_block_type('arvernus/apple-maps-block', array(
-        'editor_script' => __NAMESPACE__ . '-block',
-        'editor_style' => __NAMESPACE__ . '-block-editor-styles',
-        'style' => __NAMESPACE__ . '-block-styles',
-    ));
+    register_block_type('fabiankaegy/example', [
+        'editor_script' =>  'example-block',
+        'style' =>  'example-block-styles',
+        'editor_style' =>  'example-block-editor-styles',
+    ]);
 }

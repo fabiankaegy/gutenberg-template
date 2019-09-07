@@ -11,7 +11,7 @@
 		"lint:js": "wp-scripts lint-js",
 		"lint:pkg-json": "wp-scripts lint-pkg-json",
 		"start": "wp-scripts start",
-		"test:e2e": "wp-scripts test-e2e",
+		"test:e2e": "wp-scripts test-e2e --wordpress-base-url=http://localhost:3000 --wordpress-username=fabiankaegy --wordpress-password=AidFmdi216rdsw!",
 		"test:unit": "wp-scripts test-unit-js",
 		"env": "wp-scripts env"
 	},
@@ -35,5 +35,8 @@
 		"@wordpress/e2e-test-utils": "^2.3.0",
 		"@wordpress/eslint-plugin": "^3.0.0",
 		"@wordpress/scripts": "^4.1.0"
+	},
+	"dependencies": {
+		"@wordpress/blocks": "^6.6.0"
 	}
 }

@@ -1,7 +1,7 @@
 export default props => {
 	const {
 		classname,
-		attributes: {}
+		attributes: { content }
 	} = props;
-	return <p className={classname}>Hello World!</p>;
+	return <p className={classname}>{content}</p>;
 };
